@@ -285,6 +285,10 @@ class Repo(object):
 
         args = [os.path.join(venv_path, BIN_DIR, 'pip'), 'install',
                 '--upgrade']
+
+        if Popen(args + ['pip']).wait() != 0:
+            click.echo('Failed to upgrade pip.  Continuing with existing pip version.')
+
         if editable:
             args.append('--editable')
 
